@@ -4,10 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack"
+    "server": "static build",
+    "start": "webpack --watch"
   },
   "devDependencies": {
     "html-webpack-plugin": "^2.30.1",
+    "node-static": "^0.7.10",
     "webpack": "^3.6.0"
   }
 }
