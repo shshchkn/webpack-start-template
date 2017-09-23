@@ -1,4 +1,4 @@
-import createMenu from './parts/menu';
+import createMenu from './menu';
 
 let menu = createMenu(['Home', 'About', 'Contacts'], 'main-menu');
 
