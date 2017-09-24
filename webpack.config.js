@@ -7,6 +7,7 @@ const devserver = require('./bandles/devserver');
 const sass = require('./bandles/sass');
 const css = require('./bandles/css');
 const extractCSS = require('./bandles/css.extract');
+const uglifyJS = require('./bandles/js.uglify');
 
 const PATHS = {
     src: path.join(__dirname, 'src'),
@@ -51,7 +52,8 @@ module.exports = (env) => {
         return merge(
             [
                 common,
-                extractCSS()
+                extractCSS(),
+                uglifyJS()
             ]
         );
     }
