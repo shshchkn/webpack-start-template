@@ -4,5 +4,5 @@ module.exports = () => {
             stats: 'errors-only',
             port: 9000
         }
-    }
+    };
 };

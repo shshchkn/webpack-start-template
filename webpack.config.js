@@ -1,8 +1,9 @@
 const path = require('path');
 const HTML = require('html-webpack-plugin');
 const merge = require('webpack-merge');
-const pug = require('./config/pug');
-const devserver = require('./config/devserver');
+const pug = require('./bandles/pug');
+const devserver = require('./bandles/devserver');
+const sass = require('./bandles/sass');
 
 const PATHS = {
     src: path.join(__dirname, 'src'),
@@ -43,7 +44,8 @@ module.exports = (env) => {
         return merge(
             [
                 common,
-                devserver()
+                devserver(),
+                sass()
             ]
         );
     }
