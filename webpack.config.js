@@ -8,6 +8,7 @@ const sass = require('./bandles/sass');
 const css = require('./bandles/css');
 const extractCSS = require('./bandles/css.extract');
 const uglifyJS = require('./bandles/js.uglify');
+const images = require('./bandles/images');
 
 const PATHS = {
     src: path.join(__dirname, 'src'),
@@ -44,7 +45,8 @@ const common = merge(
             })
         ]
     },
-    pug()
+    pug(),
+    images()
 );
 
 module.exports = (env) => {
