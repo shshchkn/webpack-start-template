@@ -4,6 +4,7 @@ const merge = require('webpack-merge');
 const pug = require('./bandles/pug');
 const devserver = require('./bandles/devserver');
 const sass = require('./bandles/sass');
+const css = require('./bandles/css');
 
 const PATHS = {
     src: path.join(__dirname, 'src'),
@@ -45,7 +46,8 @@ module.exports = (env) => {
             [
                 common,
                 devserver(),
-                sass()
+                sass(),
+                css()
             ]
         );
     }
