@@ -1,10 +1,12 @@
 const path = require('path');
+const webpack = require('webpack');
 const HTML = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const pug = require('./bandles/pug');
 const devserver = require('./bandles/devserver');
 const sass = require('./bandles/sass');
 const css = require('./bandles/css');
+const extractCSS = require('./bandles/css.extract');
 
 const PATHS = {
     src: path.join(__dirname, 'src'),
@@ -19,18 +21,25 @@ const common = merge(
         },
         output: {
           path: PATHS.build,
-          filename: '[name].js'
+          filename: 'js/[name].js'
         },
         plugins: [
             new HTML({
                 filename: 'index.html',
-                chunks: ['index'],
+                chunks: ['index', 'common'],
                 template: PATHS.src + '/pages/index/index.pug'
             }),
             new HTML({
                 filename: 'blog.html',
-                chunks: ['blog'],
+                chunks: ['blog', 'common'],
                 template: PATHS.src + '/pages/blog/blog.pug'
+            }),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'common'
+            }),
+            new webpack.ProvidePlugin({
+                $: 'jquery',
+                jQuery: 'jquery'
             })
         ]
     },
@@ -39,7 +48,12 @@ const common = merge(
 
 module.exports = (env) => {
     if (env === 'production') {
-        return common;
+        return merge(
+            [
+                common,
+                extractCSS()
+            ]
+        );
     }
     if (env === 'development') {
         return merge(
